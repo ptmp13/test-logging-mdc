@@ -9,7 +9,7 @@ variables:
 
 default:
   before_script:
-    - export JAVA_HOME=/opt/oracle/java/latest_21
+    - export JAVA_HOME=/opt/oracle/java/latest_17
 
 workflow:
   rules:
