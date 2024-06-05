@@ -1,0 +1,28 @@
+# What happens?
+
+stages:
+  - build
+  - push2artifactory
+
+variables:
+  artifactory_appdir: testapps
+
+workflow:
+  rules:
+    - if: $CI_COMMIT_TAG
+
+build-job:
+  stage: build
+  script:
+    - mvn $MAVEN_CLI_OPTS clean
+    - mvn $MAVEN_CLI_OPTS package -f pom.xml -DskipTests
+  artifacts:
+    paths:
+      - ${artifactpath}/${appname}.war
+    expire_in: 5 min
+
+push2artifactory:
+  stage: push2artifactory
+  script:
+    - podman login --tls-verify=false -u ${ARTIFACTORY_USER} -p ${ARTIFACTORY_PASS} ${ARTIFACTORY_HOST}
+    - podman push ${ARTIFACTORY_HOST}/${ARTIFACTORY_PATH}/${artifactory_appdir}
