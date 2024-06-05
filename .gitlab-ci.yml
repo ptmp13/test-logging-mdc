@@ -6,6 +6,8 @@ stages:
 
 variables:
   artifactory_appdir: testapps
+  artifactpath: target
+  appname: test-logging-mdc
 
 default:
   before_script:
@@ -22,11 +24,14 @@ build-job:
     - mvn $MAVEN_CLI_OPTS package -f pom.xml -DskipTests
   artifacts:
     paths:
-      - ${artifactpath}/${appname}.war
+      - ${artifactpath}/${appname}.jar
     expire_in: 5 min
 
-push2artifactory:
+artifactory-upload-job:
   stage: push2artifactory
   script:
-    - podman login --tls-verify=false -u ${ARTIFACTORY_USER} -p ${ARTIFACTORY_PASS} ${ARTIFACTORY_HOST}
-    - podman push ${ARTIFACTORY_HOST}/${ARTIFACTORY_PATH}/${artifactory_appdir}
+    - >
+      curl -f -v
+      --user ${ARTIFACTORY_USER}:${ARTIFACTORY_PASS}
+      -T ./${artifactpath}/${appname}.jar
+      -XPUT ${ARTIFACTORY_HOST}/${ARTIFACTORY_PATH}/${artifactory_appdir}/${appname}.jar;
