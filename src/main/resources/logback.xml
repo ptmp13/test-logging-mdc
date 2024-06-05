@@ -2,7 +2,7 @@
 <configuration>
 
     <appender name="stash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-        <destination>oracleadmintst.gksm.local:11000</destination>
+        <destination>${logstashSocket}</destination>
         <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
             <providers>
                 <pattern>

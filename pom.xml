@@ -14,8 +14,9 @@
     <name>test-logging-mdc</name>
     <description>test-logging-mdc</description>
     <properties>
-        <java.version>11</java.version>
+        <java.version>17</java.version>
     </properties>
+    <packaging>jar</packaging>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -49,6 +50,7 @@
     </dependencies>
 
     <build>
+        <finalName>test-logging-mdc</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
