@@ -31,6 +31,11 @@ artifactory-upload-job:
   stage: push2artifactory
   script:
     - >
+      echo "curl -f -v
+      --user ${ARTIFACTORY_USER}:${ARTIFACTORY_PASS}
+      -T ./${artifactpath}/${appname}.jar
+      -XPUT ${ARTIFACTORY_HOST}/${ARTIFACTORY_PATH}/${artifactory_appdir}/${appname}.jar;"
+    - >
       curl -f -v
       --user ${ARTIFACTORY_USER}:${ARTIFACTORY_PASS}
       -T ./${artifactpath}/${appname}.jar
