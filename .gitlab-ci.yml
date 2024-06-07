@@ -3,6 +3,7 @@
 stages:
   - build
   - push2artifactory
+  - deploy
 
 variables:
   artifactory_appdir: testapps
@@ -31,12 +32,15 @@ artifactory-upload-job:
   stage: push2artifactory
   script:
     - >
-      echo "curl -f -v
-      --user ${ARTIFACTORY_USER}:${ARTIFACTORY_PASS}
-      -T ./${artifactpath}/${appname}.jar
-      -XPUT ${ARTIFACTORY_URL}/${ARTIFACTORY_PATH}/${artifactory_appdir}/${appname}.jar;"
-    - >
       curl -f -v
       --user ${ARTIFACTORY_USER}:${ARTIFACTORY_PASS}
       -T ./${artifactpath}/${appname}.jar
       -XPUT ${ARTIFACTORY_URL}/${ARTIFACTORY_PATH}/${artifactory_appdir}/${appname}.jar;
+
+deploy-job:
+  stage: deploy
+  variables:
+    ARTFILE: "${ARTIFACTORY_URL}/${ARTIFACTORY_PATH}/${artifactory_appdir}/${appname}.jar"
+  trigger: 
+    project: waadmin/helm/java-apps
+    branch: master
