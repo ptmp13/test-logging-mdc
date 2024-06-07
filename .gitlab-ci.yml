@@ -9,6 +9,7 @@ variables:
   artifactory_appdir: testapps
   artifactpath: target
   appname: test-logging-mdc
+  javaargs: -DlogstashSocket=oracleadmintst.gksm.local:17000
 
 default:
   before_script:
