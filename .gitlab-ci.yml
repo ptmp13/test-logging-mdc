@@ -40,7 +40,8 @@ artifactory-upload-job:
 deploy-job:
   stage: deploy
   variables:
-    ARTFILE: "${ARTIFACTORY_URL}/${ARTIFACTORY_PATH}/${artifactory_appdir}/${appname}.jar"
+    ARTFILE: ${ARTIFACTORY_URL}/${ARTIFACTORY_PATH}/${artifactory_appdir}/${appname}.jar
+    PROJECT: ${PROJECT}
   trigger: 
     project: waadmin/helm/charts/java-apps
     branch: master
