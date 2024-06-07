@@ -14,9 +14,9 @@ default:
   before_script:
     - export JAVA_HOME=/opt/oracle/java/latest_17
 
-workflow:
-  rules:
-    - if: $CI_COMMIT_TAG
+# workflow:
+#   rules:
+#     - if: $CI_COMMIT_TAG
 
 build-job:
   stage: build
