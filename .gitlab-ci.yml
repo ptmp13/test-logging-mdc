@@ -44,5 +44,5 @@ deploy-job:
     ARTFILE: ${ARTIFACTORY_URL}/${ARTIFACTORY_PATH}/${artifactory_appdir}/${appname}.jar
     PROJECT: ${PROJECT}
   trigger: 
-    project: waadmin/helm/charts/java-apps
+    project: waadmin/helm/charts/java-apps-mf
     branch: master
